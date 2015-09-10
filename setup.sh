@@ -11,18 +11,13 @@ export LOCAL="${HOME}/.local"
 
 # Install packages using apt-get
 sudo apt-get update
-sudo apt-get install git tig vim screen bash-completion bzip2 ruby
+sudo apt-get install git tig vim screen bash-completion bzip2 ruby wget
 
 ## INSTALL DOCKER
-# Add jessie-backports to apt so we can get docker
-sudo sh -c "echo deb http://cloudfront.debian.net/debian jessie-backports main >> /etc/apt/sources.list"
-sudo apt-get update
-sudo apt-get install docker.io
+wget -qO- https://get.docker.com/ | sh
 
 # Add current user to docker group for non-root access
-sudo groupadd docker
-sudo gpasswd -a ${USER} docker
-sudo service docker restart
+sudo usermod -aG docker ubuntu
 
 ## INSTALL CONDA
 # Set up where we're going to stick it
