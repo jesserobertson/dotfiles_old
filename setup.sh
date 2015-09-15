@@ -42,22 +42,6 @@ conda config --add channels jesserobertson
 conda update -q conda
 conda info
 
-## INSTALL FLEET and ETCHD
-# First of all, lets get source from Github. 
-git clone https://github.com/coreos/fleet.git
-git clone https://github.com/coreos/etcd.git
-
-# Make sure we have golang avilable
-sudo apt-get install golang
-
-# Build and install etcd
-cd etcd
-./build && ./test
-cp bin/* ${LOCAL}/bin/.
-cd ..
-
-# Build and install fleet
-cd fleet
-./build && ./test
-cp bin/* ${LOCAL}/bin/.
-cd ..
+## INSTALL JAVASCRIPT
+sudo apt-get install nodejs npm
+npm install -g bower
