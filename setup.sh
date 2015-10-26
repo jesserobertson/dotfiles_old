@@ -41,7 +41,3 @@ conda config --set always_yes yes --set changeps1 no
 conda config --add channels jesserobertson
 conda update -q conda
 conda info
-
-## INSTALL JAVASCRIPT
-sudo apt-get install nodejs npm
-npm install -g bower
