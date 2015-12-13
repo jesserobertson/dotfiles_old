@@ -24,8 +24,10 @@ curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 # Install ctrlp.vim etc
 cd ~/.vim 
-rm -rf bundle/ctrlp.vim
-git clone https://github.com/ctrlp.vim.git bundle ctrlp.vim
+rm -rf bundle
+git clone https://github.com/ctrlpvim/ctrlp.vim.git bundle/ctrlp.vim
+git clone https://github.com/sjl/gundo.vim.git bundle/gundo
+git clone https://github.com/rking/ag.vim bundle/ag
 
 ## INSTALL DOCKER
 wget -qO- https://get.docker.com/ | sh
