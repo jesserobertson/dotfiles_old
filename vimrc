@@ -1,6 +1,5 @@
 " Use pathogen to manage plugins
 execute pathogen#infect()
-execute pathogen#runtime_append_all_bundles()
 
 " basic settings
 syntax enable 	    " Turn on syntax highlighing
