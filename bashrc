@@ -17,7 +17,6 @@ AddPath ()
 # Add some paths. Last excecuted is first in line in path
 AddPath /usr/bin
 AddPath /usr/local/bin
-AddPath $HOME/.local/conda/bin
 AddPath $HOME/.local/bin
 
 # Add rbenv for ruby
@@ -27,7 +26,15 @@ AddPath $HOME/.rbenv/versions/2.2.2/bin
 # Add node.js - when building do `./configure --prefix=~/.node`
 AddPath $HOME/.node/bin
 
-## DEV ENVIRONMENT
+# Add anaconda, with functions to add and remove as you like
+AddPath $HOME/.conda/bin
+function unconda {
+    export PATH=`echo ":${PATH}:" | \
+    sed -e "s:\:$HOME/.conda/bin\::\::g" -e "s/^://" -e "s/:$//"`
+}
+function reconda {
+    export PATH="$HOME/.conda/bin:$PATH"
+}
 
 # We can make sure that libraries are installed locally
 export PREFIX=$HOME/.local
@@ -37,20 +44,28 @@ export PREFIX=$HOME/.local
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/.local/lib
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/.local/lib/pkgconfig
 
-# Add PETSc and SlepC
-export PETSC_DIR=/home/src/petsc 
-export PETSC_ARCH=arch-linux2-c-opt
+# # Add PETSc and SlepC
+# export PETSC_DIR=/home/src/petsc 
+# export PETSC_ARCH=arch-linux2-c-opt
 
 # And we want things to compile with clang
-#export CC=clang
-#export CFLAGS="-Wall -std=c99"
-#export CFLAGS_DEBUG="-g"
+export CC=clang
+export CFLAGS="-Wall -std=c11"
+export CFLAGS_DEBUG="-g"
 #export CXX=clang++
 #export CXXFLAGS="-Wall"
 #export CXXFLAGS_DEBUG="-g"
 
 # Start up ssh agent
 eval $(ssh-agent) &> /dev/null
+
+# Some stuff for Mac
+export HOMEBREW_GITHUB_API_TOKEN='ddb1f1e0edf7ee2ed5041cd9045d740e401f39b3'
+
+# # Boot2docker
+# export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2376
+# export DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm
+# export DOCKER_TLS_VERIFY=1
 
 ## ENVIRONMENT VARIABLES
 
