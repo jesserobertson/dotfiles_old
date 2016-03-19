@@ -27,13 +27,13 @@ AddPath $HOME/.rbenv/versions/2.2.2/bin
 AddPath $HOME/.node/bin
 
 # Add anaconda, with functions to add and remove as you like
-AddPath $HOME/.conda/bin
+AddPath $HOME/.local/conda/bin
 function unconda {
     export PATH=`echo ":${PATH}:" | \
-    sed -e "s:\:$HOME/.conda/bin\::\::g" -e "s/^://" -e "s/:$//"`
+    sed -e "s:\:$HOME/.local/conda/bin\::\::g" -e "s/^://" -e "s/:$//"`
 }
 function reconda {
-    export PATH="$HOME/.conda/bin:$PATH"
+    export PATH="$HOME/.local/conda/bin:$PATH"
 }
 
 # We can make sure that libraries are installed locally
