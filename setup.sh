@@ -15,8 +15,9 @@ sudo apt-get install git tig vim screen bash-completion bzip2 ruby wget curl sil
 
 ## INSTALL VIM AND BASH CONFIG
 # link configs
-ln -s ~/.vimrc vimrc
-ln -s ~/.bashrc bashrc
+ln -s vimrc ~/.vimrc 
+ln -s bashrc ~/.bashrc
+ln -s logout ~/.logout
 
 # Add pathogen
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \
