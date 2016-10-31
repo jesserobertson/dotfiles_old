@@ -49,12 +49,29 @@ export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/.local/lib/pkgconfig
 # export PETSC_ARCH=arch-linux2-c-opt
 
 # And we want things to compile with clang
-export CC=clang
-export CFLAGS="-Wall -std=c11"
-export CFLAGS_DEBUG="-g"
-#export CXX=clang++
-#export CXXFLAGS="-Wall"
-#export CXXFLAGS_DEBUG="-g"
+function clangify {
+    export CC=clang
+    export CFLAGS="-Wall -std=c11"
+    export CFLAGS_DEBUG="-g"
+    export CXX=clang++
+    export CXXFLAGS="-Wall"
+    export CXXFLAGS_DEBUG="-g"
+}
+function declangify {
+    export CC=gcc
+    export CFLAGS=
+    export CFLAGS_DEBUG=
+    export CXX=g++
+    export CXXFLAGS=
+    export CXXFLAGS_DEBUG=-g
+}
+
+# Load Intel Parallel Studio
+function source_intel {
+    export INTEL_INSTALL='/opt/intel/'
+    export PSXE_DIR='parallel_studio_xe_2017.0.035'
+    source ${INTEL_INSTALL}/${PSXE_DIR}/bin/psxevars.sh
+}
 
 # Start up ssh agent
 eval $(ssh-agent) &> /dev/null
@@ -356,6 +373,6 @@ unset color_cursor
 # Add autojump
 # This needs be done last because autojump modifies the prompt command
 # to track directories
-[[ -s "${HOME}/.autojump/etc/profile.d/autojump.sh" ]] \
-    && source "${HOME}/.autojump/etc/profile.d/autojump.sh"
+[[ -s "/usr/share/autojump/autojump.bash" ]] \
+    && source "/usr/share/autojump/autojump.bash"
 
