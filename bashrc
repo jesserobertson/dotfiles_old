@@ -10,7 +10,8 @@ SourceIfExists ()
 }
 
 # Add git completion
-SourceIfExists "~/.local/bin/git-completion.bash"
+SourceIfExists "$HOME/.local/bin/git-completion.bash"
+#source "$HOME/.local/bin/git-completion.bash"
 
 ## SET UP PATH
 
