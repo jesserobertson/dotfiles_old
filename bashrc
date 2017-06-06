@@ -1,5 +1,17 @@
 # .bash_profile - Jesse Robertson - 20 April 2015
 
+## SOURCE RELEVANT FILES
+
+SourceIfExists () 
+# Source a file if it exists
+{
+  _file=$1
+  [[ -s "$_file" ]] && source "$_file"
+}
+
+# Add git completion
+SourceIfExists "~/.local/bin/git-completion.bash"
+
 ## SET UP PATH
 
 AddPath ()
@@ -78,6 +90,13 @@ eval $(ssh-agent) &> /dev/null
 
 # Some stuff for Mac
 export HOMEBREW_GITHUB_API_TOKEN='ddb1f1e0edf7ee2ed5041cd9045d740e401f39b3'
+
+# Add some stuff for barracuda i3 setup
+alias fixit='sudo rm -f /var/lib/pacman/db.lck'
+alias update='yaourt -Syua'
+alias mirrors='sudo pacman-mirrors -g'
+alias printer='system-config-printer'
+alias i3config='vi $HOME/.i3/config'
 
 # # Boot2docker
 # export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2376
