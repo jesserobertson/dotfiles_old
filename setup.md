@@ -1,0 +1,28 @@
+# system setup
+
+Download and install dotfiles from github
+
+### Installing clean i3 styles
+
+Installing icons and styles - first install arc theme with `sudo apt install arc-theme`. Arc theme also wants the arc icons and moka icons. Install moka with 
+
+```
+sudo add-apt-repository ppa:moka/daily
+sudo apt-get update
+sudo apt-get install moka-icon-theme faba-icon-theme
+```
+
+then install arc icons with autotools
+
+```
+sudo apt install autotools-dev automake autoconf libtool git
+git clone https://github.com/horst3180/arc-icon-theme --depth 1 && cd arc-icon-theme
+./autogen.sh --prefix=/usr
+sudo make install
+```
+
+Install compton `sudo apt install compton` for compositing
+
+### Install launcher - rofi
+
+`sudo apt install rofi`
