@@ -179,9 +179,13 @@ bindsym $mod+d exec rofi -show run #-lines 3 -eh 2 -width 100 -padding 800 -opac
 exec_always --no-startup-id feh --bg-scale /home/jess/.wallpaper.jpg
 # exec_always --no-startup-id xrandr --output HDMI-0 --off --output DVI-I-1 --off --output DVI-I-0 --off --output DVI-I-3 --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-I-2 --mode 1920x1080 --pos 1920x0 --rotate normal
 exec_always nm-applet
+exec_always --no-startup-id compton -f
+exec_always blueman-applet
 
 # Keys
 exec_always xmodmap -e "clear lock" #disable caps lock switch
 exec_always xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
 
-exec --no-startup-id compton -f
+# Touchpad
+exec_always syndaemon -i 0.5 -t -K -R
+
