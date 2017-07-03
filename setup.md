@@ -10,8 +10,6 @@ Install with apt:
 sudo apt install i3 i3blocks i3status lxappearence feh
 ```
 
-
-
 ### Installing clean i3 styles
 
 Installing icons and styles - first install arc theme with `sudo apt install arc-theme`. Arc theme also wants the arc icons and moka icons. Install moka with 
@@ -36,3 +34,15 @@ Install compton `sudo apt install compton` for compositing
 ### Install launcher - rofi
 
 `sudo apt install rofi`
+
+### Linking all the things
+
+You might need to change the value of `$HOME` in some of the scripts.
+
+```bash
+ln -s ~/.dotfiles/fonts ~/.fonts
+ln -s ~/.dotfiles/i3 ~/.i3
+ln -s ~/.dotfiles/compton.conf ~/.compton.conf
+ln -s ~/.dotfiles/wallpaper.png ~/.wallpaper.png
+```
+
