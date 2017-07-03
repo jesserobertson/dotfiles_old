@@ -2,6 +2,16 @@
 
 Download and install dotfiles from github
 
+### Installing i3
+
+Install with apt:
+
+```bash
+sudo apt install i3 i3blocks i3status lxappearence feh
+```
+
+
+
 ### Installing clean i3 styles
 
 Installing icons and styles - first install arc theme with `sudo apt install arc-theme`. Arc theme also wants the arc icons and moka icons. Install moka with 
