@@ -31,6 +31,7 @@ AddPath ()
 AddPath /usr/bin
 AddPath /usr/local/bin
 AddPath $HOME/.local/bin
+AddPath ${HOME}/.local/go/bin
 
 # Add rbenv for ruby
 AddPath $HOME/.rbenv/bin
@@ -56,6 +57,9 @@ export PREFIX=$HOME/.local
 # locallaly installed packages
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/.local/lib
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/.local/lib/pkgconfig
+
+# Set up Golang stuff
+export GOPATH="$HOME/.local/go"
 
 # # Add PETSc and SlepC
 # export PETSC_DIR=/home/src/petsc 
@@ -84,6 +88,19 @@ function source_intel {
     export INTEL_INSTALL='/opt/intel/'
     export PSXE_DIR='parallel_studio_xe_2017.0.035'
     source ${INTEL_INSTALL}/${PSXE_DIR}/bin/psxevars.sh
+}
+# export CC=clang
+# export CFLAGS="-Wall -std=c11"
+# export CFLAGS_DEBUG="-g"
+#export CXX=clang++
+#export CXXFLAGS="-Wall"
+#export CXXFLAGS_DEBUG="-g"
+
+# Add Intel Parallel Studio stuff
+function source_intel {
+  export INTEL_INSTALL='/opt/intel'
+  export PSXE='parallel_studio_xe_2017.0.035'
+  source ${INTEL_INSTALL}/${PSXE}/bin/psxevars.sh
 }
 
 # Start up ssh agent
