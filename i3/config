@@ -25,6 +25,10 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
+# move workspaces across monitors
+bindsym $mod+n move workspace to output left
+bindsym $mod+m move workspace to output right
+
 # split in horizontal orientation
 bindsym $mod+b split h
 
@@ -35,9 +39,9 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen
 
 # change container layout
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+#bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -90,7 +94,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # exit i3
-bindsym $mod+Shift+e exec /home/jess/.i3/scripts/exit_menu
+bindsym $mod+Shift+e exec /home/rob65g/.i3/scripts/exit_menu
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -126,7 +130,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 
 # bar
 bar {
-  	status_command i3blocks -c /home/jess/.i3/i3blocks.conf
+  	status_command i3blocks
 	colors {
 		background $bg-color
 	    	separator #757575
@@ -152,14 +156,7 @@ assign [class="Skype"] $workspace9
 assign [class="qTox"] $workspace9
 
 # workspace default monitors
-workspace $workspace1 output DVI-I-2
-workspace $workspace2 output DVI-I-2
-workspace $workspace3 output DVI-I-2
-workspace $workspace4 output DVI-I-2
-workspace $workspace5 output DVI-I-2
-workspace $workspace6 output DVI-I-2
-workspace $workspace9 output DVI-I-2
-workspace $workspace10 output DVI-I-2
+# workspace $workspace1 output DVI-I-2
 
 # key-bindings
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 2 +5% #increase sound volume
@@ -169,18 +166,19 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPause exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
-bindsym $mod+Shift+f exec firefox
-bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+Shift+f exec chromium-browser
+bindsym $mod+Return exec gnome-terminal
 bindsym $mod+Shift+q kill
 bindsym Print exec screenshot
 bindsym $mod+d exec rofi -show run #-lines 3 -eh 2 -width 100 -padding 800 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "Inconsolata 18"
 
 # startup
-exec_always --no-startup-id feh --bg-scale /home/jess/.wallpaper.png
+exec_always --no-startup-id feh --bg-scale /home/rob65g/.wallpaper.png
 # exec_always --no-startup-id xrandr --output HDMI-0 --off --output DVI-I-1 --off --output DVI-I-0 --off --output DVI-I-3 --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-I-2 --mode 1920x1080 --pos 1920x0 --rotate normal
 exec_always nm-applet
 exec_always --no-startup-id compton -f
 exec_always blueman-applet
+exec_always dropbox start
 
 # Keys
 exec_always xmodmap -e "clear lock" #disable caps lock switch

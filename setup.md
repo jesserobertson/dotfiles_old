@@ -17,7 +17,7 @@ Installing icons and styles - first install arc theme with `sudo apt install arc
 ```
 sudo add-apt-repository ppa:moka/daily
 sudo apt-get update
-sudo apt-get install moka-icon-theme faba-icon-theme
+sudo apt-get install moka-icon-theme faba-icon-theme fonts-font-awesome
 ```
 
 then install arc icons with autotools
