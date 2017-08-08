@@ -1,5 +1,18 @@
 # .bash_profile - Jesse Robertson - 20 April 2015
 
+## SOURCE RELEVANT FILES
+
+SourceIfExists () 
+# Source a file if it exists
+{
+  _file=$1
+  [[ -s "$_file" ]] && source "$_file"
+}
+
+# Add git completion
+SourceIfExists "$HOME/.local/bin/git-completion.bash"
+#source "$HOME/.local/bin/git-completion.bash"
+
 ## SET UP PATH
 
 AddPath ()
@@ -18,6 +31,7 @@ AddPath ()
 AddPath /usr/bin
 AddPath /usr/local/bin
 AddPath $HOME/.local/bin
+AddPath ${HOME}/.local/go/bin
 
 # Add rbenv for ruby
 AddPath $HOME/.rbenv/bin
@@ -44,26 +58,63 @@ export PREFIX=$HOME/.local
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/.local/lib
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/.local/lib/pkgconfig
 
-# Add Go environment variables
-export GOPATH=$HOME/.go
+# Set up Golang stuff
+export GOPATH="$HOME/.local/go"
 
 # # Add PETSc and SlepC
 # export PETSC_DIR=/home/src/petsc 
 # export PETSC_ARCH=arch-linux2-c-opt
 
 # And we want things to compile with clang
-export CC=clang
-export CFLAGS="-Wall -std=c11"
-export CFLAGS_DEBUG="-g"
+function clangify {
+    export CC=clang
+    export CFLAGS="-Wall -std=c11"
+    export CFLAGS_DEBUG="-g"
+    export CXX=clang++
+    export CXXFLAGS="-Wall"
+    export CXXFLAGS_DEBUG="-g"
+}
+function declangify {
+    export CC=gcc
+    export CFLAGS=
+    export CFLAGS_DEBUG=
+    export CXX=g++
+    export CXXFLAGS=
+    export CXXFLAGS_DEBUG=-g
+}
+
+# Load Intel Parallel Studio
+function source_intel {
+    export INTEL_INSTALL='/opt/intel/'
+    export PSXE_DIR='parallel_studio_xe_2017.0.035'
+    source ${INTEL_INSTALL}/${PSXE_DIR}/bin/psxevars.sh
+}
+# export CC=clang
+# export CFLAGS="-Wall -std=c11"
+# export CFLAGS_DEBUG="-g"
 #export CXX=clang++
 #export CXXFLAGS="-Wall"
 #export CXXFLAGS_DEBUG="-g"
+
+# Add Intel Parallel Studio stuff
+function source_intel {
+  export INTEL_INSTALL='/opt/intel'
+  export PSXE='parallel_studio_xe_2017.0.035'
+  source ${INTEL_INSTALL}/${PSXE}/bin/psxevars.sh
+}
 
 # Start up ssh agent
 eval $(ssh-agent) &> /dev/null
 
 # Some stuff for Mac
 export HOMEBREW_GITHUB_API_TOKEN='ddb1f1e0edf7ee2ed5041cd9045d740e401f39b3'
+
+# Add some stuff for barracuda i3 setup
+alias fixit='sudo rm -f /var/lib/pacman/db.lck'
+alias update='yaourt -Syua'
+alias mirrors='sudo pacman-mirrors -g'
+alias printer='system-config-printer'
+alias i3config='vi $HOME/.i3/config'
 
 # # Boot2docker
 # export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2376
@@ -362,4 +413,6 @@ unset color_cursor
 # This needs be done last because autojump modifies the prompt command
 # to track directories
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+[[ -s "/usr/share/autojump/autojump.bash" ]] \
+    && source "/usr/share/autojump/autojump.bash"
 
