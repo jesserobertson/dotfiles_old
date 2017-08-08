@@ -27,7 +27,6 @@ AddPath $HOME/.rbenv/versions/2.2.2/bin
 AddPath $HOME/.node/bin
 
 # Add anaconda, with functions to add and remove as you like
-AddPath $HOME/.local/conda/bin
 function unconda {
     export PATH=`echo ":${PATH}:" | \
     sed -e "s:\:$HOME/.local/conda/bin\::\::g" -e "s/^://" -e "s/:$//"`
@@ -35,6 +34,7 @@ function unconda {
 function reconda {
     export PATH="$HOME/.local/conda/bin:$PATH"
 }
+reconda
 
 # We can make sure that libraries are installed locally
 export PREFIX=$HOME/.local
@@ -43,6 +43,9 @@ export PREFIX=$HOME/.local
 # locallaly installed packages
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/.local/lib
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/.local/lib/pkgconfig
+
+# Add Go environment variables
+export GOPATH=$HOME/.go
 
 # # Add PETSc and SlepC
 # export PETSC_DIR=/home/src/petsc 
@@ -104,6 +107,8 @@ shopt -s expand_aliases
 shopt -s interactive_comments
 
 ## FUNCTIONS AND ALIASES
+
+alias ls=exa;
 
 function    rmd              { rm -fr $@; }
 
@@ -356,6 +361,5 @@ unset color_cursor
 # Add autojump
 # This needs be done last because autojump modifies the prompt command
 # to track directories
-[[ -s "${HOME}/.autojump/etc/profile.d/autojump.sh" ]] \
-    && source "${HOME}/.autojump/etc/profile.d/autojump.sh"
+[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
 
