@@ -35,13 +35,12 @@ git clone https://github.com/rking/ag.vim bundle/ag
 echo "Installing Rust language"
 curl https://sh.rustup.rs -sSf | sh
 
+# Load up cargo environment to install stuff
+source ${HOME}/.cargo/env
+
 ## INSTALL EXA
 echo "Installing exa, sudo required to install to /usr/local/bin"
-mkdir -p ${LOCAL}/src
-cd ${LOCAL}/src
-git clone https://github.com/ogham/exa.git
-cd exa
-sudo make install
+cargo install --no-default-features --git https://github.com/ogham/exa
 
 ## INSTALL DOCKER
 wget -qO- https://get.docker.com/ | sh
