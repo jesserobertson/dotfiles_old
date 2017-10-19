@@ -10,6 +10,7 @@
 export LOCAL="${HOME}/.local"
 
 # Install packages using apt-get
+echo "Installing packages, requires sudo to use apt"
 sudo apt-get update
 sudo apt-get install git tig vim screen bash-completion bzip2 ruby wget curl silversearcher-ag
 
@@ -29,6 +30,18 @@ rm -rf bundle
 git clone https://github.com/ctrlpvim/ctrlp.vim.git bundle/ctrlp.vim
 git clone https://github.com/sjl/gundo.vim.git bundle/gundo
 git clone https://github.com/rking/ag.vim bundle/ag
+
+## INSTALL RUST
+echo "Installing Rust language"
+curl https://sh.rustup.rs -sSf | sh
+
+## INSTALL EXA
+echo "Installing exa, sudo required to install to /usr/local/bin"
+mkdir -p ${LOCAL}/src
+cd ${LOCAL}/src
+git clone https://github.com/ogham/exa.git
+cd exa
+sudo make install
 
 ## INSTALL DOCKER
 wget -qO- https://get.docker.com/ | sh
