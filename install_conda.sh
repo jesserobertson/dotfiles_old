@@ -16,7 +16,7 @@ rm -rf ${CONDA_HOME}
 wget --quiet ${CONDA_URL} -O miniconda.sh
 /bin/bash miniconda.sh -b -p ${CONDA_HOME}
 rm miniconda.sh
-${CONDA_HOME}/bin/conda install --yes conda==3.10.1
+${CONDA_HOME}/bin/conda install --yes conda
 export PATH=${CONDA_HOME}/bin:$PATH
 
 # Configure conda to use Jess' binstar channel
