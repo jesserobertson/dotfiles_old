@@ -34,6 +34,7 @@ AddPath /usr/bin
 AddPath /usr/local/bin
 AddPath $HOME/.local/bin
 AddPath ${HOME}/.local/go/bin
+AddPath /usr/local/opt/llvm/bin
 
 # Add rbenv for ruby
 AddPath $HOME/.rbenv/bin
