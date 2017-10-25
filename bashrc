@@ -416,3 +416,4 @@ unset color_cursor
 [[ -s "/usr/share/autojump/autojump.bash" ]] \
     && source "/usr/share/autojump/autojump.bash"
 
+export PATH="/usr/local/opt/llvm/bin:$PATH"
