@@ -6,6 +6,7 @@
 export LOCAL="${HOME}/.local"
 export CONDA_URL="https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh"
 export CONDA_HOME="${LOCAL}/conda"
+conda_exe="${CONDA_HOME}/bin/conda"
 
 # Set up paths
 # Note that conda spews if CONDA_HOME already exists
@@ -16,11 +17,13 @@ rm -rf ${CONDA_HOME}
 wget --quiet ${CONDA_URL} -O miniconda.sh
 /bin/bash miniconda.sh -b -p ${CONDA_HOME}
 rm miniconda.sh
-${CONDA_HOME}/bin/conda install --yes conda==3.10.1
+${conda_exe} install --yes conda
 export PATH=${CONDA_HOME}/bin:$PATH
 
-# Configure conda to use Jess' binstar channel
-conda config --set always_yes yes --set changeps1 no
-conda config --add channels jesserobertson
-conda update -q conda
-conda info
+# Configure config options
+${conda_exe} config --set always_yes yes --set changeps1 no
+${conda_exe} update -q conda
+
+# Configure root environment using environment file
+${conda_exe} env update --name root --file root-environment.yml
+${conda_exe} info

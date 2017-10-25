@@ -15,6 +15,8 @@ SourceIfExists "$HOME/.local/bin/git-completion.bash"
 
 ## SET UP PATH
 
+export LOCAL=${HOME}/.local
+
 AddPath ()
 # Add argument to $PATH if:
 # - it is not already present
@@ -59,11 +61,10 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/.local/lib
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/.local/lib/pkgconfig
 
 # Set up Golang stuff
-export GOPATH="$HOME/.local/go"
+export GOPATH="${LOCAL}/go"
 
-# # Add PETSc and SlepC
-# export PETSC_DIR=/home/src/petsc 
-# export PETSC_ARCH=arch-linux2-c-opt
+# Set up Rust stuff
+SourceIfExists "${HOME}/.cargo/env"
 
 # And we want things to compile with clang
 function clangify {
@@ -89,12 +90,6 @@ function source_intel {
     export PSXE_DIR='parallel_studio_xe_2017.0.035'
     source ${INTEL_INSTALL}/${PSXE_DIR}/bin/psxevars.sh
 }
-# export CC=clang
-# export CFLAGS="-Wall -std=c11"
-# export CFLAGS_DEBUG="-g"
-#export CXX=clang++
-#export CXXFLAGS="-Wall"
-#export CXXFLAGS_DEBUG="-g"
 
 # Add Intel Parallel Studio stuff
 function source_intel {
@@ -115,11 +110,6 @@ alias update='yaourt -Syua'
 alias mirrors='sudo pacman-mirrors -g'
 alias printer='system-config-printer'
 alias i3config='vi $HOME/.i3/config'
-
-# # Boot2docker
-# export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2376
-# export DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm
-# export DOCKER_TLS_VERIFY=1
 
 ## ENVIRONMENT VARIABLES
 
@@ -412,8 +402,12 @@ unset color_cursor
 # Add autojump
 # This needs be done last because autojump modifies the prompt command
 # to track directories
-[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
-[[ -s "/usr/share/autojump/autojump.bash" ]] \
-    && source "/usr/share/autojump/autojump.bash"
+if [ -f "`which brew`" ] ; then 
+    [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] \
+        && . $(brew --prefix)/etc/profile.d/autojump.sh
+else
+    [[ -s "/usr/share/autojump/autojump.bash" ]] \
+        && source "/usr/share/autojump/autojump.bash"
+fi
 
 export PATH="/usr/local/opt/llvm/bin:$PATH"
