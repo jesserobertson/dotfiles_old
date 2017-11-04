@@ -28,6 +28,7 @@ export PATH=${CONDA_HOME}/bin:$PATH
 
 # Configure config options
 ${conda_exe} config --set always_yes yes --set changeps1 no
+${conda_exe} config --add channels conda-forge
 ${conda_exe} update -q conda
 
 # Configure root environment using environment file
