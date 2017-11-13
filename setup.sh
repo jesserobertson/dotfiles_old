@@ -12,7 +12,8 @@ export LOCAL="${HOME}/.local"
 # Install packages using apt-get
 echo "Installing packages, requires sudo to use apt"
 sudo apt-get update
-sudo apt-get install git tig vim screen bash-completion bzip2 ruby wget curl silversearcher-ag
+sudo apt-get install git tig vim screen bash-completion bzip2 ruby wget \
+    curl silversearcher-ag build-essential autojump
 
 ## INSTALL VIM AND BASH CONFIG
 # link configs
