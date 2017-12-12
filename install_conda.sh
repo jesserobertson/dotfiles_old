@@ -8,8 +8,8 @@ export CONDA_HOME="${LOCAL}/conda"
 conda_exe="${CONDA_HOME}/bin/conda"
 
 # Set up conda url and location - see repo.continuum.io for options
-platform="MacOSX"
-# platform="Linux"
+# platform="MacOSX"
+platform="Linux"
 bintype="x86_64"
 # bintype="x86"
 conda_url="https://repo.continuum.io/miniconda/Miniconda3-latest-${platform}-${bintype}.sh"
@@ -28,6 +28,7 @@ export PATH=${CONDA_HOME}/bin:$PATH
 
 # Configure config options
 ${conda_exe} config --set always_yes yes --set changeps1 no
+${conda_exe} config --add channels conda-forge
 ${conda_exe} update -q conda
 
 # Configure root environment using environment file
