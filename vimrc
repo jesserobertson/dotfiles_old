@@ -1,60 +1,32 @@
-" Use pathogen to manage plugins
-set nocompatible    " be iMproved, required by Vundle
-filetype off        " required
+set nocompatible
+filetype off
 
-" vimrc-fu to bootstrap vundle to install plugins
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-let s:bootstrap = 0
-try
-    call vundle#begin()
-catch /E117:/
-    let s:bootstrap = 1
-    silent !mkdir -p ~/.vim/bundle
-    silent ~unset GIT_DIR && git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    redraw!
-    call vundle#begin()
-endtry
+" modified bootstrap, originally from John Whitley
+" https://github.com/jwhitely/vimrc/blob/master/.vim/bootstrap/bundles.vim
+let s:current_folder = expand("<sfile>:h")
 
-" let Vundle manage vundle
-Plugin 'VundleVim/Vundle.vim'
+" returns path inside .vim folder relative to this file
+function! s:RelativePathWithinDotVim(path)
+	return s:current_folder."/.vim/".a:path
+endfunction
 
-" ...other plugins
-Bundle 'chrostoomey/vim-tmux-navigator'
+" initialize vundle if we haven't yet
+let s:bundle_path = s:RelativePathWithinDotVim("bundle")
+let s:vundle_path = s:RelativePathWithinDotVim("bundle/Vundle.vim")
+if !isdirectory(s:vundle_path."/.git")
+	silent exec "!mkdir -p ".s:bundle_path
+	silent exec "!git clone --depth=1 https://github.com/gmarik/Vundle.vim.git ".s:vundle_path
+	let s:vundle_initialized = 1
+endif
 
-" Vundle end hooks
+exec "set rtp+=".s:vundle_path
+call vundle#begin(s:bundle_path)
+
+" let vundle manage itself
+Plugin 'gmarik/Vundle.vim'
+
+" other plugins...
+
+" post-run hooks
 call vundle#end()
-if s:bootstrap
-    silent PluginInstall
-    quit
-end
 filetype plugin indent on
-
-" basic settings
-syntax enable 	    " Turn on syntax highlighing
-set number          " Turn on line numbering
-set tabstop=4       " number of visual spaces per tab
-set softtabstop=4   " number of spaces in tab when editing
-set expandtab       " tabs are spaces
-
-set wildmenu        " visual autocomplete for command menu
-set lazyredraw      " redraw only when we need to
-set showmatch       " highlight matchin [{()}]
-
-" search as characters are entered, highlight matches
-" turn off search highlight with ,<space>
-set incsearch
-set hlsearch
-nnoremap <leader><space> :nohlsearch<CR>
-
-set hidden          " Leave hidden buffers open
-set history=100     " By default Vim saves last 8 commands, we can handle more
-set backup          " Save backups but to /tmp dir
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set backupskip=/tmp/*,/private/tmp/*
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set writebackup
-
-" shortcuts
-let mapleader=","   " \ is too far away, use , instead
-
