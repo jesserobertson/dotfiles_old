@@ -32,16 +32,10 @@ AddPath ()
 # Add some paths. Last excecuted is first in line in path
 AddPath /usr/bin
 AddPath /usr/local/bin
-AddPath $HOME/.local/bin
+AddPath ${HOME}/.local/bin
 AddPath ${HOME}/.local/go/bin
 AddPath /usr/local/opt/llvm/bin
-
-# Add rbenv for ruby
-AddPath $HOME/.rbenv/bin
-AddPath $HOME/.rbenv/versions/2.2.2/bin
-
-# Add node.js - when building do `./configure --prefix=~/.node`
-AddPath $HOME/.node/bin
+AddPath ${HOME}/.cargo/bin
 
 # Add anaconda, with functions to add and remove as you like
 function unconda {
@@ -85,32 +79,17 @@ function declangify {
     export CXXFLAGS_DEBUG=-g
 }
 
-# Load Intel Parallel Studio
-function source_intel {
-    export INTEL_INSTALL='/opt/intel/'
-    export PSXE_DIR='parallel_studio_xe_2017.0.035'
-    source ${INTEL_INSTALL}/${PSXE_DIR}/bin/psxevars.sh
-}
-
-# Add Intel Parallel Studio stuff
-function source_intel {
-  export INTEL_INSTALL='/opt/intel'
-  export PSXE='parallel_studio_xe_2017.0.035'
-  source ${INTEL_INSTALL}/${PSXE}/bin/psxevars.sh
-}
-
 # Start up ssh agent
 eval $(ssh-agent) &> /dev/null
 
 # Some stuff for Mac
 export HOMEBREW_GITHUB_API_TOKEN='ddb1f1e0edf7ee2ed5041cd9045d740e401f39b3'
 
-# Add some stuff for barracuda i3 setup
-alias fixit='sudo rm -f /var/lib/pacman/db.lck'
-alias update='yaourt -Syua'
-alias mirrors='sudo pacman-mirrors -g'
-alias printer='system-config-printer'
-alias i3config='vi $HOME/.i3/config'
+## FUNCTIONS AND ALIASES
+
+alias prodigy="python -m prodigy"
+alias spacy="python -m spacy"
+alias ls="exa"
 
 ## ENVIRONMENT VARIABLES
 
@@ -148,79 +127,6 @@ shopt -s hostcomplete
 shopt -s expand_aliases
 shopt -s interactive_comments
 
-## FUNCTIONS AND ALIASES
-
-alias ls=exa;
-
-function    rmd              { rm -fr $@; }
-
-function    x                { exit    $@; }
-function    z                { suspend $@; }
-
-function    osr              { shutdown -r now; }
-function    osh              { shutdown -h now; }
-
-function    ss               { sudo -s; }
-
-function    p                { ${PAGER}  $@; }
-function    e                { ${EDITOR} $@; }
-
-function    c                { clear; }
-function    h                { history $@; }
-function    hc               { history -c; }
-function    hcc              { hc;c; }
-
-function    cx               { hc;x; }
-function    ..               { cd ..; }
-function	cdl              { cd $@ && ls;}
-
-function    ll               { ls -FAql $@; }
-function    lf               { ls -FAq  $@; }
-
-function    mfloppy          { mount /dev/fd0 /mnt/floppy; }
-function    umfloppy         { umount /mnt/floppy; }
-
-function    mdvd             { mount -t iso9660 -o ro /dev/dvd /mnt/dvd; }
-function    umdvd            { umount /mnt/dvd; }
-
-function    mcdrom           { mount -t iso9660 -o ro /dev/cdrom /mnt/cdrom; }
-function    umcdrom          { umount /mnt/cdrom; }
-
-function    miso             { mount -t iso9660 -o ro,loop $@ /mnt/iso; }
-function    umiso            { umount /mnt/iso; }
-
-function    ff               { find . -name $@ -print; }
-
-function    psa              { ps aux $@; }
-function    psu              { ps  ux $@; }
-
-function    lpsa             { ps aux $@ | p; }
-function    lpsu             { ps  ux $@ | p; }
-
-function    dub              { du -sclb $@; }
-function    duk              { du -sclk $@; }
-function    dum              { du -sclm $@; }
-function    duh              { du -sclh $@; }
-
-function    dfk              { df -PTak $@; }
-function    dfm              { df -PTam $@; }
-function    dfh              { df -PTah $@; }
-function    dfi              { df -PTai $@; }
-
-function    dmsg             { dmesg | p; }
-
-function    kernfs           { p /proc/filesystems; }
-function    shells           { p /etc/shells; }
-
-function    lfstab           { p /etc/fstab; }
-function    lxconf           { p /etc/X11/xorg.conf; }
-
-if [ `id -u` -eq 0 ]
-then
-    function    efstab       { e /etc/fstab; }
-    function    exconf       { e /etc/X11/xorg.conf; }
-    function    txconf       { X -probeonly; }
-fi
 ## COMPLETIONS
 
 # Start bash completion
@@ -412,3 +318,4 @@ else
 fi
 
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"

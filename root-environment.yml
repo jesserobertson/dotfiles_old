@@ -13,6 +13,7 @@ dependencies:
     - h5py
     - ipython
     - jupyter
+    - jupyterlab
     - ipykernel
     - ipywidgets
     - nb_conda
@@ -27,6 +28,10 @@ dependencies:
     - pytest
     - pytest-runner
     - coverage
+    - spacy
+    - textacy
+    - lxml
+    - beautifulsoup4
     - pip:
         - jsonschema
         - click
