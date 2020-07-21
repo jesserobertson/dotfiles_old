@@ -44,9 +44,9 @@ echo "Installing exa, sudo required to install to /usr/local/bin"
 cargo install --no-default-features --git https://github.com/ogham/exa
 
 ## INSTALL DOCKER
-wget -qO- https://get.docker.com/ | sh
+# wget -qO- https://get.docker.com/ | sh
 
 # Add current user to docker group for non-root access
-sudo usermod -aG docker $USER
+# sudo usermod -aG docker $USER
 
-bash install_conda.sh
+# bash install_conda.sh
