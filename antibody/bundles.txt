@@ -4,6 +4,7 @@ mafredri/zsh-async
 rupa/z
 zsh-users/zsh-completions
 zsh-users/zsh-autosuggestions
+softmoth/zsh-vim-mode
 
 # these should be at last!
 reobin/typewritten
