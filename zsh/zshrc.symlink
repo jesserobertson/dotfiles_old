@@ -9,6 +9,9 @@ export PROJECTS="$HOME/Code"
 export EDITOR='vim'
 export VEDITOR='code'
 
+# Don't show vi mode in spaceship prompt
+export SPACESHIP_VI_MODE_SHOW false
+
 # all of our zsh files
 typeset -U config_files
 config_files=($DOTFILES/*/*.zsh)
