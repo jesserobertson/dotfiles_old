@@ -6,11 +6,12 @@ mine.
 ## Setup
 
 We need a few dependencies prior to starting:
-- git
-- tig
-- wget
-- fontconfig
-- zip
+
+```sh
+$ sudo apt install zsh fzf tig git 
+```
+
+and then you need to set your default shell to zsh with `chsh -s $(which zsh)`.
 
 ## Install dependencies and run
 
@@ -25,3 +26,5 @@ Fire up a shell and run
 
 Then you should be able to open a new terminal and get dropped into a nice
 environment :)
+
+You can install components seperately, eg `rust/install.sh` - the bootstrap script just runs everything in sequence. 
