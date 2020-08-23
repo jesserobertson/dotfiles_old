@@ -1,10 +1,9 @@
 # Other packages
-# reobin/typewritten
-# mafredri/zsh-async
 rupa/z
 zsh-users/zsh-completions
 zsh-users/zsh-autosuggestions
 softmoth/zsh-vim-mode
+darvid/zsh-poetry
 
 # these should be at last!
 reobin/typewritten
