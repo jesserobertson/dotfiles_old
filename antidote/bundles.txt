@@ -1,0 +1,4 @@
+# Other packages
+mattmc3/zephyr
+rupa/z
+zdharma/fast-syntax-highlighting kind:defer

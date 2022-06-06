@@ -9,34 +9,42 @@ export PROJECTS="$HOME/Code"
 export EDITOR='vim'
 export VEDITOR='code'
 
-# all of our zsh files
+# Source antidote
+antidote load
+
+# Load up out config files and antidote plugins
 typeset -U config_files
 config_files=($DOTFILES/*/*.zsh)
-
-# load the path files
 for file in ${(M)config_files:#*/path.zsh}; do
-  source "$file"
+    source "$file"
 done
-
-# load antibody plugins
 source ~/.zsh_plugins.sh
 
-# load everything but the path and completion files
+# Load everything but the path and completion files
 for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}; do
-  source "$file"
+    source "$file"
 done
 
-autoload -Uz compinit
-for dump in ~/.zcompdump(N.mh+24); do
-  compinit
-done
-compinit -C
-
-
-# load every completion after autocomplete loads
+# Load completion after autocomplete loads
 for file in ${(M)config_files:#*/completion.zsh}; do
-  source "$file"
+    source "${file}"
 done
 
 unset config_files updated_at
 
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/jess/.conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/jess/.conda/etc/profile.d/conda.sh" ]; then
+        . "/home/jess/.conda/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/jess/.conda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+eval "$(starship init zsh)"
