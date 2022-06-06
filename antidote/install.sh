@@ -6,5 +6,5 @@ else
 	mkdir -p ~/.local/bin
 	git clone https://github.com/mattmc3/antidote.git ~/.antidote
 fi
-. ~/.antidote/antidote.zsh
+source "$HOME/.antidote/antidote.zsh"
 antidote bundle <"$DOTFILES/antidote/bundles.txt" >~/.zsh_plugins.zsh

@@ -10,6 +10,7 @@ export EDITOR='vim'
 export VEDITOR='code'
 
 # Source antidote
+source ~/.antidote/antidote.zsh
 antidote load
 
 # Load up out config files and antidote plugins
